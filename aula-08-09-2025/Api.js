@@ -7,7 +7,6 @@ export const fetchEstoque = async (setRegistros) => {
     if (!response.ok) {
       throw new Error('Erro ao buscar o Estoque');
     }
-
     const data = await response.json();
     console.log('Estoques recebidos da API:', data);
     setRegistros(data.data);

@@ -1,25 +1,24 @@
-import React, {useEffect} from 'react';
-import {View, ActivityIndicator, Image, Stylesheet} from 'react-native';
-const SplashScreen = ({navigation}) => {
+import React, { useEffect } from "react";
+import { View, ActivityIndicator, Image, StyleSheet } from 'react-native';
+
+const SplashScreen = ({ navigator }) => {
     useEffect(() => {
-        // Define a duração do splash (4 segundos)
+        //Define a duração do splash (4 segundos)
         const timer = setTimeout(() => {
-            navigation.replace('Home'); // Após o tempo, navega para a tela de Home
-
+            navigator.replace('Home'); //Após o tempo, navega p/ tela de Home
         }, 4000);
-        return() => clearTimeout(timer); // Limpa o timer quando o componente for desmontado
 
-    }, [navigation]);
+        return () => clearTimeout(timer); // limpa o timer quandoo componete for desmontado
+    }, [navigator]);
     return (
-        <View style = {styles.splashContainer}>
-            <Image source = {{uri: 'https://th.bing.com/th/id/OIP.mdQNJIR3L9a-U7yk4X7QdwHaEK?rs=1&pid=ImgDetMain'}} style = {styles.splashImage} />
-            <ActivityIndicator size = "large" color = "#0000ff" style = {styles.loader} />
+        <View style={StyleSheet.SplashScreen}>
+            <image souce={{uri:'https://br.pinterest.com/pin/2885187254116752/'}} style = {StyleSheet.SplashScreen} />
+            <ActivityIndicator size="large" color="#0000ff" style={StyleSheet.loader} />
         </View>
-
     );
 };
-const styles = StyleSheet.create({
-    splashContainer: {
+const style = StyleSheet.create({
+    SplashScreen: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
