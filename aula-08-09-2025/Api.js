@@ -1,4 +1,4 @@
-const API_URL = 'https://siteapi/';
+const API_URL = 'https://apiestoque.webapptech.site/api/produtos/';
 import { Alert } from 'react-native';
 
 export const fetchEstoque = async (setRegistros) => {
@@ -18,7 +18,7 @@ export const fetchEstoque = async (setRegistros) => {
 
 export const createEstoque = async (EstoqueData) => {
   try {
-    const response = await fetch('https://siteapi/', {
+    const response = await fetch('https://apiestoque.webapptech.site/api/produtos/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,19 +58,19 @@ export const createEstoque = async (EstoqueData) => {
 
 export const deleteEstoque = async (EstoqueId, setRegistros) => {
   try {
-    const response = await fetch(`https://siteapi/${EstoqueId}`, {
+    const response = await fetch(`https://apiestoque.webapptech.site/api/produtos/${EstoqueId}`, {
       method: 'DELETE',
     });
 
-    // Verifica se a resposta foi bem-sucedida
     if (response.ok) {
       const responseData = await response.json();
 
       if (responseData.success) {
         Alert.alert('Sucesso!', responseData.message);
-        // Atualiza a lista localmente
+
+        // Atualiza a lista local usando o id correto
         setRegistros((prevRegistros) => {
-          const novaLista = prevRegistros.filter((Estoques) => Estoques.codigo !== EstoqueId);
+          const novaLista = prevRegistros.filter((estoque) => estoque.id !== EstoqueId);
           console.log('Nova lista de Estoques:', novaLista);
           return novaLista;
         });
@@ -78,13 +78,12 @@ export const deleteEstoque = async (EstoqueId, setRegistros) => {
         Alert.alert('Erro', responseData.message);
       }
     } else {
-      // Caso a resposta não seja ok, tenta processar a mensagem de erro
       const textResponse = await response.text();
       let responseData = null;
 
       try {
         responseData = JSON.parse(textResponse);
-      } catch (error) {
+      } catch {
         console.warn('A resposta não é um JSON válido.');
       }
 
@@ -96,9 +95,10 @@ export const deleteEstoque = async (EstoqueId, setRegistros) => {
   }
 };
 
+
 export const updateEstoque = async (EstoqueId, updatedData, navigation) => {
   try {
-    const response = await fetch(`https://siteapi/${EstoqueId}`, {
+    const response = await fetch(`https://apiestoque.webapptech.site/api/produtos/${EstoqueId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

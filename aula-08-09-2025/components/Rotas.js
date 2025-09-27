@@ -1,15 +1,19 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../components/Home';
 import SplashScreen from '../components/SplashScreen';
+import Cadastro from '../components/Cadastro';
+import Alterar from '../components/Alterar';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 export default function Rotas() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "Splash" component = {SplashScreen} options = {{headerShown: false}} />
         <Stack.Screen name = "Home" component = {Home} />
+        <Stack.Screen name= "Cadastro" component={Cadastro} />
+        <Stack.Screen name= "Alterar" component= {Alterar}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

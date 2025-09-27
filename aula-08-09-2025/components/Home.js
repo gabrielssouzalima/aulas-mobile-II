@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Alert, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, Text, IconButton } from 'react-native-paper';
-import { fetchEstoque, deleteEstoque } from './Api';
+import { fetchEstoque, deleteEstoque } from '../Api';
 
 export default function Home({ navigation }) {
     const [registro, setRegistros] = useState([]);
@@ -29,8 +29,8 @@ export default function Home({ navigation }) {
                 data={registro}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <Card style={style.card}>
-                        <View style={style.cardContent}>
+                    <Card style={styles.card}>
+                        <View style={styles.cardContent}>
                             {/* Coluna da esquerda: texto */}
                             <View style={StyleSheet.infoColumn}>
                                 <Text style={StyleSheet.title}>Código: {item.id}</Text>
@@ -45,7 +45,7 @@ export default function Home({ navigation }) {
                                     icon="pencil"
                                     size={24}
                                     iconColor="#3498db"
-                                    onPress={() => navigation.navigate('Alterar', { Estoque: item })}
+                                    onPress={() => navigation.navigate('Alterar', { produtos: item })}
                                 />
                                 <IconButton
                                     icon="delete"
@@ -60,10 +60,10 @@ export default function Home({ navigation }) {
             />
 
             <TouchableOpacity
-                style={StyleSheet.floatingButton}
+                style={styles.floatingButton}
                 onPress={() => navigation.navigate('Cadastro')}
             >
-                <Text style={StyleSheet.plusIcon}> + </Text>
+                <Text style={styles.plusIcon}> + </Text>
             </TouchableOpacity>
         </View>
     );
@@ -97,8 +97,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   floatingButton: {
-    position: 'absolute',
-    bottom: 20,
+    position: 'fixed',
     alignSelf: 'center',
     backgroundColor: '#27ae60',
     width: 60,
@@ -107,6 +106,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5,
+  },
+  titulo: {
+    fontSize: 40,
+    marginTop: 25,
+    marginBottom: 10,
+    textAlign: 'center',
   },
   plusIcon: {
     color: '#fff',
