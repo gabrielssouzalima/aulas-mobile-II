@@ -26,7 +26,6 @@ export default function Cadastro({ navigation }) {
         Alert.alert("Sucesso!", "Cadastro realizado com sucesso!", [
           { text: "OK", onPress: () => navigation.navigate("Home") },
         ]);
-        fetchEstoque(setRegistros); // atualiza a lista
       }
     } catch (error) {
       Alert.alert("Erro", "Não foi possível cadastrar o produto.");
